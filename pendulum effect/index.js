@@ -19,16 +19,38 @@ const pang = []
 for (let i = 0; i < 1000; i++) {
   pang.push(
     new Pendulum(
-      new Vector(innerWidth / 2, 0),
+      new Vector(innerWidth / 2 + i / 60, 100),
       i + 100,
       10,
-      20,
+      1,
       -0.1,
-      0.98,
+      0.985,
       Math.PI / 2,
     ),
   )
 }
+
+const sleep = (time) => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, time)
+  })
+}
+
+let windspeed = 0.1
+let duration = 50
+const domefav = async () => {
+  for (let j = 0; j < 1000; j++) {
+    await sleep(3000)
+    for (let k = 0; k < duration; k++) {
+      await sleep(100)
+      for (let i = 0; i < pang.length; i++) {
+        pang[i].velocity += windspeed / (pang[i].height / 5)
+      }
+    }
+  }
+}
+domefav()
+
 const draw = () => {
   brush.clearRect(0, 0, canvas.width, canvas.height)
   for (let i = 0; i < pang.length; i++) {
@@ -43,11 +65,8 @@ const tick = () => {
 }
 
 const ignite = () => {
-  //   for (let i = 0; i < 100; i++) {
-  // }
   tick()
   draw()
-  //   ignite()
   requestAnimationFrame(ignite)
 }
 
