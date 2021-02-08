@@ -7,7 +7,7 @@ class Frequency {
   }
 
   draw = (brush) => {
-    brush.strokeStyle = 'white'
+    brush.strokeStyle = 'rgba(255, 56, 56,1)'
     brush.beginPath()
     brush.moveTo(this.points[0].x, this.points[0].y)
     for (let point of this.points) {
