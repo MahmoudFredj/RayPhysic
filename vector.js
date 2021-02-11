@@ -13,12 +13,22 @@ class Vector {
     return Vector.div(vector, magnitude)
   }
 
+  limit(value) {
+    if (this.x > value) this.x = value
+    if (this.y > value) this.y = value
+  }
   //get magnitude of the vector
   magnitude() {
     return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2))
   }
   static magnitude(vector) {
     return Math.sqrt(Math.pow(vector.x, 2) + Math.pow(vector.y, 2))
+  }
+
+  static distance(vector1, vector2) {
+    return Math.sqrt(
+      Math.pow(vector1.x - vector2.x, 2) + Math.pow(vector1.y - vector2.y, 2),
+    )
   }
 
   //   OPERATORS

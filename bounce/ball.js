@@ -1,5 +1,5 @@
 class Ball {
-  constructor(pos, size, mass, gravity) {
+  constructor(pos, size, mass, gravity, boyency) {
     this.pos = pos
     this.size = size
     this.mass = mass
@@ -7,6 +7,8 @@ class Ball {
     this.velocity = new Vector(0, 0)
     this.acceleration = 0.1
     this.windAcc = 0.03
+
+    this.boyency = boyency
   }
 
   draw = (brush) => {
@@ -26,7 +28,7 @@ class Ball {
     if (this.pos.y + this.size >= ground) {
       this.pos.y = ground - this.size
       this.velocity.y *= -1
-      this.velocity.y /= 1.2
+      this.velocity.y *= this.boyency
     } else if (this.pos.x + this.size >= wall) {
       this.pos.x = wall - this.size
       this.velocity.x *= -1
