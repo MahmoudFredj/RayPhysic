@@ -12,7 +12,7 @@ class Pendulum {
 
   draw = (brush) => {
     brush.fillStyle = 'rgb(255,255,255,1)'
-    brush.strokeStyle = 'rgb(255, 71, 87,0.05)'
+    brush.strokeStyle = 'rgb(255, 71, 87,0.1)'
 
     brush.beginPath()
     brush.moveTo(this.pos.x, this.pos.y)

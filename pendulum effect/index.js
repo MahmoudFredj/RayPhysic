@@ -36,10 +36,10 @@ const sleep = (time) => {
   })
 }
 
-let windspeed = 0.1
-let duration = 50
+let windspeed = 0.9
+let duration = 1000
 const domefav = async () => {
-  for (let j = 0; j < 1000; j++) {
+  for (let j = 0; j < pang.length; j++) {
     await sleep(3000)
     for (let k = 0; k < duration; k++) {
       await sleep(100)

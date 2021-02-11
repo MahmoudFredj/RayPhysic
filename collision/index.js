@@ -15,7 +15,7 @@ canvas.height = innerHeight
 const circles = []
 
 for (let i = 0; i < 100; i++) {
-  const mass = Math.random() * 20 + 4
+  const mass = Math.random() * 20 + 2
   circles.push(
     new Circle(
       random(50, innerWidth - 50),
@@ -60,7 +60,6 @@ const draw = () => {
 const ignite = () => {
   tick()
   draw()
-
   requestAnimationFrame(ignite)
 }
 
