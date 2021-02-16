@@ -4,7 +4,7 @@ const brush = canvas.getContext('2d')
 canvas.width = innerWidth
 canvas.height = innerHeight
 
-const fre = new Frequency(0.05, 100)
+const fre = new Frequency(0.01, 100)
 
 let amp = 300
 let ang = 0
@@ -22,9 +22,9 @@ const tick = () => {
   fre.tick()
 
   fre.amplitude = Math.sin(ang) * amp
-  amp *= 0.95
+  amp *= 0.94
   ang += angv
-  angv *= 0.9999
+  angv *= 0.999
   if (mouse.pressed) {
     fre.amplitude = mouse.y - innerHeight / 2
     flick = true

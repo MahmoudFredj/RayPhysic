@@ -10,7 +10,6 @@ class Rectangle {
     brush.fillStyle = 'rgb(46, 213, 115,0.4)'
     brush.strokeStyle = 'rgb(46, 213, 115,1.0)'
     brush.lineWidth = 2
-
     brush.beginPath()
     brush.moveTo(this.x, this.y)
     brush.lineTo(this.x + this.width, this.y)
