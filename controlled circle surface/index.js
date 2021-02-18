@@ -4,46 +4,37 @@ const brush = canvas.getContext('2d')
 canvas.width = innerWidth
 canvas.height = innerHeight
 
-const origin = new Vector(innerWidth / 2, innerHeight / 2)
-const point = new Vector(0, 0)
+let path = []
+let spacing = 0.01
+let radius = 100
+let pos = new Vector(200, 200)
+let start = 0
+const tick = () => {
+  path = []
+  for (let i = 0; i < Math.PI * 2; i += spacing) {
+    path.push(
+      new Vector(Math.sin(i) * radius + pos.x, Math.cos(i) * radius + pos.y),
+    )
+  }
+  let ang = start
+  for (let i = 0; i < path.length; i++) {
+    path[i].add(new Vector(Math.sin(ang) * 10, Math.cos(ang) * 10))
+    ang += 0.1
+  }
 
-let advancing = 1
-
-const tick = () => {}
+  start += 0.1
+  if (start > 1000) start = 0
+}
 
 const draw = () => {
-  //   brush.clearRect(0, 0, innerWidth, innerHeight)
-  brush.fillStyle = 'rgb(0,0,0,0.1)'
-  brush.fillRect(0, 0, innerWidth, innerHeight)
-
-  point.x = Math.sin(Math.random())
-  point.y = Math.cos(Math.random())
-  point.mult(200)
-  point.add(origin)
-
-  brush.strokeStyle = 'rgb(255,255,255,1)'
+  brush.clearRect(0, 0, innerWidth, innerHeight)
+  brush.strokeStyle = 'white'
+  brush.fillStyle = 'white'
   brush.beginPath()
-  brush.moveTo(point.x, point.y)
-  for (
-    let i = Math.random() * 0.0001;
-    i < Math.PI * 2;
-    i += advancing * 4 + 0.0001
-  ) {
-    point.x = Math.sin(i)
-    point.y = Math.cos(i)
-    point.mult(200)
-    point.add(origin)
-    const random = Vector.Random()
-    random.mult(50)
-    point.add(random)
-
-    brush.lineTo(point.x, point.y)
+  for (let i = 0; i < path.length; i++) {
+    brush.lineTo(path[i].x, path[i].y)
   }
-  point.x = Math.sin(Math.random())
-  point.y = Math.cos(Math.random())
-  point.mult(200)
-  point.add(origin)
-  brush.lineTo(point.x, point.y)
+  brush.lineTo(path[0].x, path[0].y)
   brush.stroke()
 }
 
@@ -52,9 +43,5 @@ const ignite = () => {
   draw()
   requestAnimationFrame(ignite)
 }
-
-document.addEventListener('mousemove', (e) => {
-  advancing = e.clientX / innerWidth + e.clientY / innerHeight
-})
 
 ignite()
