@@ -5,10 +5,11 @@ canvas.width = innerWidth
 canvas.height = innerHeight
 
 let path = []
-let spacing = 0.01
+let spacing = 0.005
 let radius = 100
-let pos = new Vector(200, 200)
+let pos = new Vector(innerWidth / 2, innerHeight / 2)
 let start = 0
+let speed = 0.01
 const tick = () => {
   path = []
   for (let i = 0; i < Math.PI * 2; i += spacing) {
@@ -18,17 +19,17 @@ const tick = () => {
   }
   let ang = start
   for (let i = 0; i < path.length; i++) {
-    path[i].add(new Vector(Math.sin(ang) * 10, Math.cos(ang) * 10))
-    ang += 0.1
+    path[i].add(new Vector(Math.sin(ang) * 100, Math.cos(ang) * 100))
+    ang += 15
   }
 
-  start += 0.1
+  start += speed
   if (start > 1000) start = 0
 }
 
 const draw = () => {
   brush.clearRect(0, 0, innerWidth, innerHeight)
-  brush.strokeStyle = 'white'
+  brush.strokeStyle = 'rgb(255,255,255,0.15)'
   brush.fillStyle = 'white'
   brush.beginPath()
   for (let i = 0; i < path.length; i++) {
@@ -45,3 +46,7 @@ const ignite = () => {
 }
 
 ignite()
+
+document.addEventListener('mousemove', ({ clientX }) => {
+  speed = clientX / (innerWidth * 50)
+})
